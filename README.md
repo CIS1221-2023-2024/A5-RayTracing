@@ -2,7 +2,7 @@
 
 ## The idea
 
-This project will approach ray-tracing using different programming language, you can find details about each of them in the respective wiki page associated below
+This project will approach ray-tracing using different programming languages, you can find details about each of them in the respective wiki page associated below
 
 - [Python](./python/readme.md)
 - [Python (Numpy)](./python-numpy/readme.md)
