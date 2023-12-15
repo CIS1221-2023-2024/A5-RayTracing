@@ -1,4 +1,4 @@
-from hittable import Hittable
+from Hittable import Hittable
 from math import sqrt
 
 class Sphere(Hittable):
@@ -6,7 +6,7 @@ class Sphere(Hittable):
         self.center = center
         self.radius = radius
     
-    def hit(self, r, ray_tmin, ray_tmax, rec):
+    def hit(self, r, ray_t, rec):
         oc = r.origin - self.center
         a = r.direction.length_squared()
         half_b = r.direction.dot(oc)
@@ -19,9 +19,9 @@ class Sphere(Hittable):
         sqrtd = sqrt(discriminant)
 
         root = (-half_b - sqrtd) / a
-        if (root <= ray_tmin or ray_tmax <= root):
+        if not ray_t.surrounds(root):
             root = (-half_b + sqrtd) / a
-            if (root <= ray_tmin or ray_tmax <= root):
+            if not ray_t.surrounds(root):
                 return False
         rec.t = root
         rec.p = r.at(rec.t)

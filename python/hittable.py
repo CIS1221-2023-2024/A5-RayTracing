@@ -1,4 +1,5 @@
 from Vec3 import Vec3
+from Interval import Interval
 
 class Hittable:
     def hit(self, ray, ray_t, rec):
@@ -33,13 +34,13 @@ class HittableList():
     def clear(self):
         self.objects.clear()
 
-    def hit(self, ray, ray_tmin, ray_tmax, rec):
+    def hit(self, ray, ray_t, rec):
         temp_rec = HitRecord()
         self.hit_anything = False
-        self.closest_so_far = ray_tmax
+        self.closest_so_far = ray_t.t_max
 
         for obj in self.objects:
-            if obj.hit(ray, ray_tmin, self.closest_so_far, temp_rec):
+            if obj.hit(ray, Interval(ray_t.t_min, self.closest_so_far), temp_rec):
                 self.hit_anything = True
                 self.closest_so_far = temp_rec.t
                 rec.copy(rec2=temp_rec)
