@@ -1,3 +1,4 @@
+import math
 import random
 
 infinity = float('inf')
@@ -10,3 +11,6 @@ def random_double():
 
 def random_double_range(min, max):
     return random.uniform(min, max)
+
+def linear_to_gamma(linear):
+    return math.sqrt(linear)

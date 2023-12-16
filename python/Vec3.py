@@ -1,5 +1,7 @@
 import math
 
+from utilities import random_double, random_double_range
+
 class Vec3:
     def __init__(self, e0=0, e1=0, e2=0):
         self.e = [e0, e1, e2]
@@ -69,6 +71,31 @@ class Vec3:
     
     def unit_vector(self):
         return self / self.length()
+    
+    def ranodm():
+        return Vec3(random_double(), random_double(), random_double())
+    
+    def random(min, max):
+        return Vec3(random_double_range(min,max), random_double_range(min,max), random_double_range(min,max))
+    
+    @staticmethod
+    def random_in_unit_sphere():
+        while True:
+            p = Vec3.random(-1,1)
+            if p.length_squared() >= 1:
+                return p
+
+    @staticmethod       
+    def random_unit_vector():
+        return Vec3.random_in_unit_sphere().unit_vector()
+    
+    @staticmethod
+    def random_on_hemisphere(normal):
+        in_unit_sphere = Vec3.random_unit_vector()
+        if in_unit_sphere.dot(normal) > 0.0:
+            return in_unit_sphere
+        else:
+            return -in_unit_sphere
     
 Color = Vec3
 Point3 = Vec3

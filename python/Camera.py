@@ -1,7 +1,7 @@
 from Hittable import HitRecord
 from Interval import Interval
 from Ray import Ray
-from utilities import infinity, lerp, random_double
+from utilities import infinity, lerp, linear_to_gamma, random_double
 from Vec3 import Color, Point3, Vec3
 
 FILENAME="./python/output.ppm"
@@ -12,6 +12,7 @@ class Camera:
     aspect_ratio = 1.0
     image_width = 100
     samples_per_pixel = 10
+    max_depth = 10
 
     image_height = 100
     camera_center = Point3(0,0,0)
@@ -30,7 +31,7 @@ class Camera:
                     pixel_color = Color(0,0,0)
                     for sample in range(self.samples_per_pixel):
                         r = self.get_ray(j,i)
-                        pixel_color += self.ray_color(r, world)
+                        pixel_color += self.ray_color(r, self.max_depth, world)
                     # pixel_center = self.pixel00_loc + (j * self.pixel_delta_u) + (i * self.pixel_delta_v)
                     # ray_direction = pixel_center - self.camera_center
                     # r = Ray(self.camera_center, ray_direction)
@@ -73,16 +74,21 @@ class Camera:
         py = -0.5 + random_double()
         return (px * self.pixel_delta_u) + (py * self.pixel_delta_v)
 
-    def ray_color(self, r, world):
+    def ray_color(self, r, max_depth ,world):
         rec = HitRecord()
-        if (world.hit(r,Interval(0, infinity), rec)):
-            return 0.5 * (rec.normal + Color(1,1,1))
+
+        if(max_depth <= 0):
+            return Color(0,0,0)
+        if (world.hit(r,Interval(0.001, infinity), rec)):
+            direction = Vec3.random_unit_vector() + rec.normal
+            return 0.1 * self.ray_color(Ray(rec.p, direction), max_depth-1, world)
 
         unit_direction = r.direction.unit_vector()
         a = 0.5*(unit_direction.y + 1.0)
         start = Color(1.0,1.0,1.0)
         end = Color(0.5,0.7,1.0)
         return lerp(start,end,a)
+    
     
 
     def write_color(self, out, pixel_color):
@@ -96,6 +102,10 @@ class Camera:
         r *= scale
         g *= scale
         b *= scale
+
+        r = linear_to_gamma(r)
+        g = linear_to_gamma(g)
+        b = linear_to_gamma(b)
 
         intensity = Interval(0.000, 0.999)
 
