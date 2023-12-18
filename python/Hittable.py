@@ -1,7 +1,9 @@
 from Vec3 import Vec3
 from Interval import Interval
+from abc import ABC,abstractclassmethod
 
-class Hittable:
+class IHittable(ABC):
+    @abstractclassmethod
     def hit(self, ray, ray_t, rec):
         pass
 

@@ -1,7 +1,7 @@
-from Hittable import Hittable
+from Hittable import IHittable
 from math import sqrt
 
-class Sphere(Hittable):
+class Sphere(IHittable):
     def __init__(self, center, radius):
         self.center = center
         self.radius = radius
