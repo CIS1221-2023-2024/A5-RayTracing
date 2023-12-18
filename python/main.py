@@ -1,13 +1,15 @@
-from Vec3 import Point3
+from Vec3 import Color, Point3
 from Hittable import HittableList
 from Sphere import Sphere
 from Camera import Camera
+from Lambertian import Lambertian
+from Metal import Metal
 
 # World
 def main():
     world = HittableList()
-    world.add(Sphere(Point3(0,0,-1), 0.5))
-    world.add(Sphere(Point3(0,-100.5,-1), 100))
+    world.add(Sphere(Point3(0,0,-1), 0.5, Metal(Color(0.1,0.2,0.5))))
+    world.add(Sphere(Point3(0,-100.5,-1), 100, Metal(Color(0.8,0.8,0.0))))
 
     cam = Camera()
 

@@ -2,9 +2,10 @@ from Hittable import IHittable
 from math import sqrt
 
 class Sphere(IHittable):
-    def __init__(self, center, radius):
+    def __init__(self, center, radius, mat):
         self.center = center
         self.radius = radius
+        self.mat = mat
     
     def hit(self, r, ray_t, rec):
         oc = r.origin - self.center
@@ -27,5 +28,6 @@ class Sphere(IHittable):
         rec.p = r.at(rec.t)
         normal = (rec.p - self.center) / self.radius
         rec.set_face_normal(r, normal)
+        rec.mat = self.mat
 
         return True

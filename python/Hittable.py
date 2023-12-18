@@ -12,6 +12,7 @@ class HitRecord:
         self.t = 0
         self.p = Vec3(0,0,0)
         self.normal = Vec3(0,0,0)
+        self.mat = None
 
     
     def set_face_normal(self, ray, outward_normal):
@@ -23,6 +24,7 @@ class HitRecord:
         self.p = rec2.p
         self.normal = rec2.normal
         self.front_face = rec2.front_face
+        self.mat = rec2.mat
 
 class HittableList():
     def __init__(self, objects = []):

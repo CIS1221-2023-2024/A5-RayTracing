@@ -80,8 +80,11 @@ class Camera:
         if(max_depth <= 0):
             return Color(0,0,0)
         if (world.hit(r,Interval(0.001, infinity), rec)):
-            direction = Vec3.random_unit_vector() + rec.normal
-            return 0.1 * self.ray_color(Ray(rec.p, direction), max_depth-1, world)
+            scattered = Ray(Vec3(1,1,1),Vec3(1,1,1))
+            attenuation = Color()
+            if(rec.mat.scatter(r,rec,attenuation,scattered)):
+                return attenuation * self.ray_color(scattered,max_depth - 1,world)
+            return Color(0,0,0)
 
         unit_direction = r.direction.unit_vector()
         a = 0.5*(unit_direction.y + 1.0)
