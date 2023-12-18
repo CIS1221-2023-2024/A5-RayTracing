@@ -1,16 +1,12 @@
 class Ray:
 
     def __init__(self, origin, direction):
-        self.orig = origin
-        self.dir = direction
-
-    @property
-    def origin(self):
-        return self.orig
-
-    @property
-    def direction(self):
-        return self.dir
+        self.origin = origin
+        self.direction = direction
 
     def at(self, t):
-        return self.orig + t * self.dir
+        return self.origin + t * self.direction
+
+    def copy(self, ray2):
+        self.origin = ray2.origin
+        self.direction = ray2.direction

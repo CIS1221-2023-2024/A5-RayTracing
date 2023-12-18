@@ -96,6 +96,18 @@ class Vec3:
             return in_unit_sphere
         else:
             return -in_unit_sphere
+
+    def near_zero(self):
+        s = 1e-8
+        return (abs(self.e[0]) < s) and (abs(self.e[1]) < s) and (abs(self.e[2]) < s)
+
+    def reflect(self, n):
+        return self - 2* self.dot(n) * n
+        
+    def copy(self, v2):
+        self.e[0] = v2.e[0]
+        self.e[1] = v2.e[1]
+        self.e[2] = v2.e[2]
     
 Color = Vec3
 Point3 = Vec3
