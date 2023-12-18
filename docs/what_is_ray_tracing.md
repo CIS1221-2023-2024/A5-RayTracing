@@ -28,7 +28,23 @@ These rays solve the visibility problem and are called primary rays (or camera r
 To actually display something, we need to check if our ray intersects any of the objects that are in our scene. 
 For mathematically described shapes (AKA spheres, triangles, etc), we can do this using a geometrical approach to solve an equation.
 - **SPHERE EQUATION**
-  - /equation/
+  The equation for a sphere of radius *r* centered at the origin is: $x^2 + y^2 + z^2 = r^2$
+  So if any given point $(x,y,z)$ is on the sphere, then $x^2 + y^2 + z^2 = r^2$, if the point is inside the sphere, then $x^2 + y^2 + z^2 < r^2$ and if it is outside the sphere, then $x^2 + y^2 + z^2 > r^2$
+  Suppose we want to allow the sphere center to be at an arbitrary point with coordinates $(C_x, C_y, C_z)$, then the equation becomes: $(x-C_x)^2 + (y-C_y)^2 + (z-C_z)^2 = r^2$.
+  Generally speaking, we would like the formulas to be in terms of vectors so that all the coordinates can be expressed using a Vector class. 
+  This implies that the vector that goes from the center $C = (C_x, C_y, C_z)$ to a point $P = (x,y,z)$ is $(P - C)$
+  Utilizing the definition of dot product between two vectors we get that the distance between center and point is equals to the definition of the sphere given a center of coordinates  $(C_x, C_y, C_z)$. Therefore, we can rewrite the equation as follows: $(P - C) \cdot (P - C) = r^2$
+  We want to know wether our ray $P(t)$ ever hits the sphere anywhere.
+  Given that $P$ is our Point, $P(t)$ is the function that casts the ray from that given point then 
+  $P(t) = O + t b$, where O is the origin of the ray, b is the direction of the ray and t is the distance from the origin to the sphere. This means that if the equation solved for t does not give any value, the ray is not intersecting the sphere at any point, it follows that if the equation has one solution the ray is tangent to the sphere, if it has two the ray is hitting the sphere twice, hence it's secant.
+  We can rewrite the equation as follows: $(P(t) - C) \cdot (P(t) - C) = r^2$, or rather
+  $((O + tb) - C) \cdot ((O + tb) - C) = r^2$
+  Solving for t, and using the quadratic formula we get that 
+  $ a = b \cdot b, \newline
+  b = 2b \cdot (O -C) \newline
+  c = (A - C) \cdot (A - C) - r^2
+  $
+  Note that all the steps are not worked out in this paper since they are quite long
 - **TRIANGLE EQUATION**
   - /equation/
 
