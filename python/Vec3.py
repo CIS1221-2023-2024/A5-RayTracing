@@ -72,7 +72,7 @@ class Vec3:
     def unit_vector(self):
         return self / self.length()
     
-    def ranodm():
+    def random():
         return Vec3(random_double(), random_double(), random_double())
     
     def random(min, max):
