@@ -103,7 +103,13 @@ class Vec3:
 
     def reflect(self, n):
         return self - 2* self.dot(n) * n
-        
+    
+    def refract(self, n, etai_over_etat):
+        cos_theta = min(-self.dot(n), 1.0)
+        r_out_perp = etai_over_etat * (self + cos_theta * n) 
+        r_out_parallel = -math.sqrt(abs(1.0 - r_out_perp.length_squared())) * n
+        return r_out_perp + r_out_parallel
+
     def copy(self, v2):
         self.e[0] = v2.e[0]
         self.e[1] = v2.e[1]
