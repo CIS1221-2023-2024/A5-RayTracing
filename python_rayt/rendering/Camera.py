@@ -1,7 +1,8 @@
+from math import tan
 from python_rayt.rendering.Hittable import HitRecord
 from python_rayt.rendering.Interval import Interval
 from python_rayt.rendering.Ray import Ray
-from python_rayt.utilities import infinity, lerp, linear_to_gamma, random_double
+from python_rayt.utilities import degrees_to_radians, infinity, lerp, linear_to_gamma, random_double
 from python_rayt.geometries.Vec3 import *
 
 
@@ -11,6 +12,13 @@ class Camera:
     image_width = 100
     samples_per_pixel = 10
     max_depth = 10
+
+    vfov = 90
+    lookfrom = Point3(0,0,-1)
+    lookat = Point3(0,0,0)  
+    vup = Vec3(0,1,0);   
+    u, v, w = Vec3(0,0,0), Vec3(0,0,0), Vec3(0,0,0)
+
     filename="output.ppm"
 
     image_height = 100
@@ -44,20 +52,30 @@ class Camera:
         self.image_height = int(self.image_width / self.aspect_ratio)
         self.image_height = 1 if self.image_height < 1 else self.image_height
 
+        self.camera_center = self.lookfrom 
+
+        focal_length = (self.lookfrom - self.lookat).length()
+
         focal_length = 1.0
-        viewport_height = 2.0
+        theta = degrees_to_radians(self.vfov)
+        h = tan(theta/2)
+        viewport_height = 2 * h * focal_length
         viewport_width = viewport_height * (self.image_width / self.image_height)
 
+        w = (self.lookfrom - self.lookat).unit_vector()
+        u = (self.vup.cross(w)).unit_vector()
+        v = w.cross(u)
+
         # Viewport vectors
-        viewport_u = Vec3(viewport_width, 0, 0)
-        viewport_v = Vec3(0, -viewport_height, 0)
+        viewport_u = viewport_width * u
+        viewport_v = viewport_height * -v
 
         # Pixel vectors
         self.pixel_delta_u = viewport_u / self.image_width
         self.pixel_delta_v = viewport_v / self.image_height
 
         # Pixel00 location
-        viewport_upper_left = self.camera_center - Vec3(0, 0, focal_length) - viewport_u / 2 - viewport_v / 2
+        viewport_upper_left = self.camera_center - (focal_length * w) - viewport_u/2 - viewport_v/2
         self.pixel00_loc = viewport_upper_left + 0.5 * (self.pixel_delta_u + self.pixel_delta_v)
 
     def get_ray(self, i, j):

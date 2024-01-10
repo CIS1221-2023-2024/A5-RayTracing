@@ -14,3 +14,6 @@ def random_double_range(min, max):
 
 def linear_to_gamma(linear):
     return math.sqrt(linear)
+
+def degrees_to_radians(degrees):
+    return degrees * math.pi / 180.0

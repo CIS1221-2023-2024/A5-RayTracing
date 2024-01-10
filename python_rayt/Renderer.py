@@ -1,5 +1,5 @@
 from python_rayt.geometries.Sphere import Sphere
-from python_rayt.geometries.Vec3 import Color, Point3
+from python_rayt.geometries.Vec3 import Color, Point3, Vec3
 from python_rayt.materials.Dielectric import Dielectric
 from python_rayt.materials.Lambertian import Lambertian
 from python_rayt.materials.Metal import Metal
@@ -38,14 +38,6 @@ class Renderer:
                     
 
 
-        material1 = Dielectric(1.5)
-        world.add(Sphere(Point3(0, 1, 0), 1.0, material1))
-
-        material2 = Lambertian(Color(0.4, 0.2, 0.1))
-        world.add(Sphere(Point3(-4, 1, 0), 1.0, material2))
-
-        material3 = Metal(Color(0.7, 0.6, 0.5), 0.0)
-        world.add(Sphere(Point3(4, 1, 0), 1.0, material3))
 
         cam = Camera()
         cam.aspect_ratio = ratio
@@ -53,6 +45,10 @@ class Renderer:
         cam.samples_per_pixel = samples
         cam.max_depth = depth
         cam.filename = output
+        cam.vfov     = 90
+        cam.lookfrom = Point3(-2,2,1)
+        cam.lookat   = Point3(0,0,-1)
+        cam.vup      = Vec3(0,1,0)
         
 
         cam.render(world)
