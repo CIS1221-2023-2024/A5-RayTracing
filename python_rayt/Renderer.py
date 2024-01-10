@@ -9,8 +9,9 @@ from python_rayt.utilities import random_double_range, random_double
 
 
 class Renderer:
-    def render(samples, width, depth, number, output, numpy, ratio):
+    def render(self,samples, width, depth, number, output, numpy, ratio):
         world = HittableList()
+        world.clear()
 
         ground_material = Lambertian(Color(0.5, 0.5, 0.5))
         world.add(Sphere(Point3(0,-1000,0), 1000, ground_material))
@@ -49,6 +50,8 @@ class Renderer:
         cam.lookfrom = Point3(-2,2,1)
         cam.lookat   = Point3(0,0,-1)
         cam.vup      = Vec3(0,1,0)
+
+        print(world)
         
 
         cam.render(world)

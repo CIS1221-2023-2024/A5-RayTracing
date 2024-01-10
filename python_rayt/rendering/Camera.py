@@ -39,10 +39,6 @@ class Camera:
                     for sample in range(self.samples_per_pixel):
                         r = self.get_ray(j,i)
                         pixel_color += self.ray_color(r, self.max_depth, world)
-                    # pixel_center = self.pixel00_loc + (j * self.pixel_delta_u) + (i * self.pixel_delta_v)
-                    # ray_direction = pixel_center - self.camera_center
-                    # r = Ray(self.camera_center, ray_direction)
-                    # pixel_color = self.ray_color(r, world)
                     self.write_color(f, pixel_color)
 
         print("\rDone.")
