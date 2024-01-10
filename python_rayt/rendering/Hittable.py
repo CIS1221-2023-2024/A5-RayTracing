@@ -1,5 +1,5 @@
-from geometries.Vec3 import Vec3
-from rendering.Interval import Interval
+from python_rayt.geometries.Vec3 import Vec3
+from python_rayt.rendering.Interval import Interval
 from abc import ABC,abstractclassmethod
 
 class IHittable(ABC):

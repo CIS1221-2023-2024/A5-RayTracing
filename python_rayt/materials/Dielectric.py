@@ -1,8 +1,8 @@
 import math
-from materials.Material import IMaterial
-from geometries.Vec3 import Color
-from rendering.Ray import Ray
-from utilities import random_double
+from python_rayt.materials.Material import IMaterial
+from python_rayt.geometries.Vec3 import Color
+from python_rayt.rendering.Ray import Ray
+from python_rayt.utilities import random_double
 
 
 class Dielectric(IMaterial):

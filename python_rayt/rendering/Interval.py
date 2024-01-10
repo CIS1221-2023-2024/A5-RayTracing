@@ -1,4 +1,4 @@
-from utilities import infinity
+from python_rayt.utilities import infinity
 
 class Interval:
     def __init__(self, _t_min=infinity, _t_max=-infinity):

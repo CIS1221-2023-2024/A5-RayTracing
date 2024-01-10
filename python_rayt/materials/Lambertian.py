@@ -1,6 +1,6 @@
-from materials.Material import IMaterial
-from rendering.Ray import Ray
-from geometries.Vec3 import Color, Vec3
+from python_rayt.materials.Material import IMaterial
+from python_rayt.rendering.Ray import Ray
+from python_rayt.geometries.Vec3 import Color, Vec3
 
 
 class Lambertian(IMaterial):

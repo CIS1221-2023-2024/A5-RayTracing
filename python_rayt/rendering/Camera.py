@@ -1,10 +1,9 @@
-from rendering.Hittable import HitRecord
-from rendering.Interval import Interval
-from rendering.Ray import Ray
-from utilities import infinity, lerp, linear_to_gamma, random_double
-from geometries.Vec3 import *
+from python_rayt.rendering.Hittable import HitRecord
+from python_rayt.rendering.Interval import Interval
+from python_rayt.rendering.Ray import Ray
+from python_rayt.utilities import infinity, lerp, linear_to_gamma, random_double
+from python_rayt.geometries.Vec3 import *
 
-FILENAME="../output.ppm"
 
 class Camera:
     #Image dimensions (these get passed from main)
@@ -12,6 +11,7 @@ class Camera:
     image_width = 100
     samples_per_pixel = 10
     max_depth = 10
+    filename="output.ppm"
 
     image_height = 100
     camera_center = Point3(0,0,0)
@@ -22,7 +22,7 @@ class Camera:
     def render(self, world):
         self.initialize()
 
-        with open(FILENAME,"w") as f:
+        with open(self.filename,"w") as f:
             f.write(f"P3\n{self.image_width} {self.image_height}\n")
             f.write("255\n")
             for i in range(self.image_height):

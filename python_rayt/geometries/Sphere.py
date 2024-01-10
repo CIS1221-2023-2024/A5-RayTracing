@@ -1,4 +1,4 @@
-from rendering.Hittable import IHittable
+from python_rayt.rendering.Hittable import IHittable
 from math import sqrt
 
 class Sphere(IHittable):

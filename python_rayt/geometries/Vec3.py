@@ -1,6 +1,6 @@
 import math
 
-from utilities import random_double, random_double_range
+from python_rayt.utilities import random_double, random_double_range
 
 class Vec3:
     def __init__(self, e0=0, e1=0, e2=0):
