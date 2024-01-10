@@ -1,4 +1,4 @@
-from Hittable import IHittable
+from rendering.Hittable import IHittable
 from math import sqrt
 
 class Sphere(IHittable):

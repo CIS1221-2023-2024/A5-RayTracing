@@ -1,10 +1,10 @@
-from Vec3 import Color, Point3
-from Hittable import HittableList
-from Sphere import Sphere
-from Camera import Camera
-from Lambertian import Lambertian
-from Metal import Metal
-from Dielectric import Dielectric
+from geometries.Vec3 import Color, Point3
+from rendering.Hittable import HittableList
+from rendering.Camera import Camera
+from geometries.Sphere import Sphere
+from materials.Lambertian import Lambertian
+from materials.Metal import Metal
+from materials.Dielectric import Dielectric
 
 def main():
     world = HittableList()

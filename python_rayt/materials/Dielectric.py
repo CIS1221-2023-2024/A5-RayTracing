@@ -1,7 +1,7 @@
 import math
-from Material import IMaterial
-from Vec3 import Color
-from Ray import Ray
+from materials.Material import IMaterial
+from geometries.Vec3 import Color
+from rendering.Ray import Ray
 from utilities import random_double
 
 

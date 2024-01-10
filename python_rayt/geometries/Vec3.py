@@ -114,6 +114,7 @@ class Vec3:
         self.e[0] = v2.e[0]
         self.e[1] = v2.e[1]
         self.e[2] = v2.e[2]
-    
+
+__init__ = Vec3
 Color = Vec3
 Point3 = Vec3

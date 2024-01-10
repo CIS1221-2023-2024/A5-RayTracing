@@ -1,6 +1,6 @@
-from Hittable import HitRecord
-from Ray import Ray
-from abc import ABC,abstractclassmethod
+from rendering.Hittable import HitRecord
+from rendering.Ray import Ray
+from abc import ABC, abstractclassmethod
 
 
 class IMaterial(ABC):

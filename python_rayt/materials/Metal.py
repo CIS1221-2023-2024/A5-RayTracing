@@ -1,6 +1,6 @@
-from Material import IMaterial
-from Ray import Ray
-from Vec3 import Color, Vec3
+from materials.Material import IMaterial
+from rendering.Ray import Ray
+from geometries.Vec3 import Color, Vec3
 
 
 class Metal(IMaterial):

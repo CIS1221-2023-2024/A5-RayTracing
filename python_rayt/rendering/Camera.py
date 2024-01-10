@@ -1,13 +1,12 @@
-from Hittable import HitRecord
-from Interval import Interval
-from Ray import Ray
+from rendering.Hittable import HitRecord
+from rendering.Interval import Interval
+from rendering.Ray import Ray
 from utilities import infinity, lerp, linear_to_gamma, random_double
-from Vec3 import Color, Point3, Vec3
+from geometries.Vec3 import *
 
-FILENAME="./python/output.ppm"
+FILENAME="../output.ppm"
 
 class Camera:
-
     #Image dimensions (these get passed from main)
     aspect_ratio = 1.0
     image_width = 100
