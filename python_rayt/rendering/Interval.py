@@ -18,7 +18,5 @@ class Interval:
             return self.t_max
         return x
 
-
-
 empty = Interval(infinity, -infinity)
 universe = Interval(-infinity, infinity)

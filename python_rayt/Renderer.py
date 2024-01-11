@@ -53,5 +53,4 @@ class Renderer:
 
         print(world)
         
-
         cam.render(world)
