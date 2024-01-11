@@ -7,10 +7,12 @@ def lerp(start,end,value):
     return (1-value) * start + value * end
 
 def random_double():
-    return random.uniform(0,1)
+    rand = random.uniform(0,1)
+    return rand
 
 def random_double_range(min, max):
-    return random.uniform(min, max)
+    rand = random.uniform(min,max)
+    return rand 
 
 def linear_to_gamma(linear):
     return math.sqrt(linear)

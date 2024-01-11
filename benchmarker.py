@@ -3,6 +3,7 @@ from time import time
 import tracemalloc
 import sys
 import os
+from itertools import product
 
 sys.path.insert(1, os.path.realpath(os.path.pardir))
 from python_rayt.Renderer import Renderer as PythonRenderer
@@ -18,7 +19,8 @@ def benchmark_decorator(func):
 
 
         print(f'Took {time_duration:.3f} seconds')
-        print(tracemalloc.get_traced_memory())
+        current,peak = tracemalloc.get_traced_memory()
+        print(f'Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB')
 
         tracemalloc.stop()
         return result
@@ -28,27 +30,21 @@ def benchmark_decorator(func):
 def benchmark(function, **kargs):
     function(**kargs)
 
+def generate_setting(samples = 10, width = 400, depth=5, number=4, output="output.png", numpy=False, ratio = 16/9):
+    return {
+        "samples": samples,
+        "width": width,
+        "depth": depth,
+        "number": number,
+        "output": output,
+        "numpy": numpy,
+        "ratio": ratio
+    }
+
 def main():
-    settings = [{
-        "samples": 1,
-        "width": 100,
-        "depth": 10,
-        "number": 4,
-        "output": "output.ppm",
-        "numpy": False,
-        "ratio": 16.0 / 9.0
-    }, {
-        "samples": 1,
-        "width": 100,
-        "depth": 10,
-        "number": 4,
-        "output": "output.ppm",
-        "numpy": False,
-        "ratio": 16.0 / 9.0
-    
-    }] * 2
+    settings = [generate_setting()]
     for idx,setting in enumerate(settings):
-        setting['output'] = f"{setting['samples']}_{setting['depth']}_{setting['width']}_{setting['number']}_{'np' if setting['numpy'] else 'python'}_{idx}.ppm"
+        setting['output'] = f"./benchmarks/{setting['samples']}_{setting['depth']}_{setting['width']}_{setting['number']}_{'np' if setting['numpy'] else 'python'}_{idx}.ppm"
         renderer = PythonRenderer()
         benchmark(renderer.render, **setting)
 
