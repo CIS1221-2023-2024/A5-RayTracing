@@ -6,10 +6,12 @@ from python_rayt.materials.Metal import Metal
 from python_rayt.rendering.Camera import Camera
 from python_rayt.rendering.Hittable import HittableList
 from python_rayt.utilities import random_double_range, random_double
+import random
 
 
 class Renderer:
     def render(self,samples, width, depth, number, output, numpy, ratio):
+        random.seed(100)
         world = HittableList()
         world.clear()
 
