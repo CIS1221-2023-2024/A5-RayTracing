@@ -18,4 +18,5 @@ parser.add_argument("-np", "--numpy", type=bool, default=False, help="Use numpy 
 parser.add_argument("-r", '--ratio', type=float, default=16.0 / 9.0, help="Aspect ratio of the image")
  
 args = parser.parse_args().__dict__
-PythonRenderer.render(**args)
+renderer = PythonRenderer()
+renderer.render(**args)
