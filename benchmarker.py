@@ -42,7 +42,16 @@ def generate_setting(samples = 10, width = 400, depth=5, number=4, output="outpu
     }
 
 def main():
-    settings = [generate_setting()]
+    samples =  [5,50,100]
+    depths = [5,10,20]
+    widths = [480,1360,1920]
+
+    # Generate all possible combinations
+    combinations = list(product(samples, depths, widths))
+
+    # Display the result
+    totals = [list(combination) for combination in combinations]
+    settings = [generate_setting(samples=total[0],depth=total[1],width=total[2]) for total in totals]
     for idx,setting in enumerate(settings):
         setting['output'] = f"./benchmarks/{setting['samples']}_{setting['depth']}_{setting['width']}_{setting['number']}_{'np' if setting['numpy'] else 'python'}_{idx}.ppm"
         renderer = PythonRenderer()
