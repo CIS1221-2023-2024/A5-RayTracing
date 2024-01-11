@@ -18,6 +18,9 @@
 - 3.3 Dielectric
 - 3.4 Lambertian
 
+### [4. Utilities & more](#utilities-&-more)
+- 4.2 Renderer
+- 4.3 Benchmarker
 
 ---
 
@@ -133,3 +136,31 @@ The `scatter` method generates a random scattering direction by adding the surfa
 </div>
 
 ---
+
+### Utilities & more
+
+This section is to show the last part of the project, the utilities functions utilized, how is the renderer handled and how is the benchmarker working
+
+<div style="margin-left: 20px">
+    <h4 style="margin-left: -10px">Utilities</h4>
+
+This file is used to handle functions that have been used inside many different modules of the proejct. They are placed here to have a common repository to get these functions easily when needed. It is included: the linear interpolation (`lerp`), random double generation (`random_double` and `random_double_range`), gamma correction (`linear_to_gamma`), and conversion between degrees and radians (`degrees_to_radians`).
+</div>
+
+<div style="margin-left: 20px">
+    <h4 style="margin-left: -10px">Renderer</h4>
+
+The `Renderer` class is the one whose responsibility is the rendering process. Its primary function, the `render` method, takes in parameters that will eventually overwrite the default `Camera`'s ones.
+
+Within this method, a virtual scene is constructed using a `HittableList` named `world`. Here both material and position as well as the color of the sphere are set randomly for each sphere, while the number of spheres is set before the rendering. (When benchmarking the randomness seed will be the same so that we have a way to compare)
+
+The rendering process is initiated with the `cam.render(world)` method, where rays are cast into the scene, intersections with objects are handled, and pixel colors are calculated based on material interactions. 
+
+</div>
+
+<div style="margin-left: 20px">
+    <h4 style="margin-left: -10px">Benchmarker</h4>
+
+benchmarker... 
+
+</div>
