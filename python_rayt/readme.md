@@ -77,4 +77,28 @@ The `at` method computes a point along the ray's trajectory at a given parameter
 
 The `Interval` class manages a numerical range defined by minimum (`t_min`) and maximum (`t_max`) values. It provides methods for checking containment, strict enclosure, and clamping values within the interval. Predefined instances include `empty` (an empty interval) and `universe` (covering the entire real number line) which proved quite helpful during the project. This is more of an utility class to compute intervals.
 
+### Materials
 
+Materials in the real worlds absorp, reflect and refract light in different manners. This section is to show how each material has different properties and how these can change the overall aspect of a surface, including shiny surfaces, transparent objects, and textured materials.
+
+#### Material
+
+The `IMaterial` class serves as an abstract blueprint for materials in the ray tracing project. It declares an abstract method `scatter` that defines how rays interact with materials during scattering events. Subclasses will then implement this method to specify material-specific behaviours
+
+#### Metal 
+
+The `Metal` class handles metal material properties. The `scatter` method calculates a realistic reflection on a metal surface. It combines a reflected ray with controlled fuzziness, introducing randomness.
+
+#### Dielectric
+
+The `Dielectric` class handles dielectric material properties. Dielectric objects are the non-metallic ones like plastic and glass
+
+This `scatter` method first sets the attenuation to full white, indicating minimal light absorption and then calculates the refraction ratio based on whether the ray hit the front or back face of the material.
+
+Next, it computes the angles and checks if refraction is possible thanks to the Snell's law. If not, the ray is reflected, otherwise it gets refracted 
+
+#### Lambertian
+
+The `Lambertian` class handles lambertian reflectance, also known as "matte". It is a type of surface that appears uniformly bright from all directions, and thus reflects the entire incident light. An example of lambertian material is wood
+
+The `scatter` method generates a random scattering direction by adding the surface normal to a randomly generated unit vector. A check ensures that the scatter direction is not degenerate (zero or close to zero), and if so, it is set to the surface normal. The scattered ray is then updated, and the attenuation is set to the material's color.
