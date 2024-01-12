@@ -36,7 +36,7 @@ class Camera:
         threads = []
         for i in range(0,self.image_height,self.image_height//self.n_threads):
             world_new = copy.deepcopy(world)
-            t = threading.Thread(target=self.render_width, args=(i,i+self.image_height//self.n_threads,self.image_width,world_new))
+            t = threading.Thread(target=self.render_width, args=(i,i+self.image_height//self.n_threads,world_new))
             t.start()
             threads.append(t)
 
