@@ -23,7 +23,7 @@ class Camera:
 
     filename="output.ppm"
     pixels = []
-    n_threads = 2
+    n_threads = 6
 
     image_height = 100
     camera_center = Point3(0,0,0)
@@ -37,9 +37,15 @@ class Camera:
         manager = multiprocessing.Manager()
         pixels = manager.dict()
         idx = 0
-        for i in range(0,self.image_height,self.image_height//self.n_threads):
+        step = self.image_height // self.n_threads 
+        remainder = self.image_height % self.n_threads
+        for i in range(0, self.image_height, step):
             world_new = copy.deepcopy(world)
-            t = multiprocessing.Process(target=self.render_width, args=(idx,pixels,i,i+self.image_height//self.n_threads,world_new))
+
+            if(i + step + remainder == self.image_height):
+                step += remainder
+
+            t = multiprocessing.Process(target=self.render_width, args=(idx,pixels,i,i + step,world_new))
             idx += 1
             t.start()
             threads.append(t)
