@@ -11,8 +11,7 @@ class Lambertian(IMaterial):
         scatter_direction = rec.normal + Vec3.random_unit_vector()
 
         #Catch degenerate scatter direction
-        if (scatter_direction.near_zero()):
-            scatter_direction = rec.normal
+        scatter_direction = rec.normal if scatter_direction.near_zero() else scatter_direction
         r = Ray(rec.p,scatter_direction)
         scattered.copy(r)
         attenuation.copy(self.albedo)

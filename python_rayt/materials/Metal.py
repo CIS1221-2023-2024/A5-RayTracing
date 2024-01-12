@@ -5,7 +5,7 @@ from python_rayt.geometries.Vec3 import Color, Vec3
 
 class Metal(IMaterial):
     def __init__(self, albedo : Color, fuzz : float):
-        self.fuzz = fuzz if fuzz < 1 else 1
+        self.fuzz = min(fuzz, 1)
         self.albedo = albedo
 
     def scatter(self, r_in, rec, attenuation, scattered):

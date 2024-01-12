@@ -12,11 +12,7 @@ class Interval:
         return self.t_min < x < self.t_max
     
     def clamp(self, x):
-        if x < self.t_min:
-            return self.t_min
-        if x > self.t_max:
-            return self.t_max
-        return x
+        return max(self.t_min, min(x, self.t_max))
 
 empty = Interval(infinity, -infinity)
 universe = Interval(-infinity, infinity)

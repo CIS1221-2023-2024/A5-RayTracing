@@ -11,8 +11,7 @@ class Dielectric(IMaterial):
 
     @staticmethod
     def reflectance(cosine, ref_idx):
-        r0 = (1 - ref_idx) / (1 + ref_idx)
-        r0 = r0 * r0
+        r0 = ((1- ref_idx) / (1 + ref_idx)) ** 2
         return r0 + (1 - r0) * pow((1 - cosine), 5)
 
     def scatter(self, r_in, rec, attenuation, scattered):
