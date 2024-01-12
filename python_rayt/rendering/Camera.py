@@ -5,7 +5,7 @@ from python_rayt.rendering.Ray import Ray
 from python_rayt.utilities import degrees_to_radians, infinity, lerp, linear_to_gamma, random_double
 from python_rayt.geometries.Vec3 import *
 import copy
-import threading
+import multiprocessing
 
 
 class Camera:
@@ -23,7 +23,7 @@ class Camera:
 
     filename="output.ppm"
     pixels = []
-    n_threads = 1
+    n_threads = 2
 
     image_height = 100
     camera_center = Point3(0,0,0)
@@ -34,19 +34,22 @@ class Camera:
     def render(self, world):
         self.initialize()
         threads = []
+        manager = multiprocessing.Manager()
+        pixels = manager.dict()
+        idx = 0
         for i in range(0,self.image_height,self.image_height//self.n_threads):
             world_new = copy.deepcopy(world)
-            t = threading.Thread(target=self.render_width, args=(i,i+self.image_height//self.n_threads,world_new))
+            t = multiprocessing.Process(target=self.render_width, args=(idx,pixels,i,i+self.image_height//self.n_threads,world_new))
+            idx += 1
             t.start()
             threads.append(t)
 
         for thread in threads:
             thread.join()
-            self.pixels += thread.return_value
-        print("\rDone.")
-        self.write_file(self.filename,self.pixels)
 
-    def render_width(self,h_start,h_end,world):
+        self.write_file(pixels)
+
+    def render_width(self,idx,pixels,h_start,h_end,world):
         results = []
         for i in range(h_start,h_end):
             for j in range(self.image_width):
@@ -55,7 +58,8 @@ class Camera:
                     r = self.get_ray(j,i)
                     pixel_color += self.ray_color(r, self.max_depth, world)
                 results.append(pixel_color)
-        threading.current_thread().return_value = results
+
+        pixels[idx] = results
         print("\rDone.")
 
     def initialize(self):
@@ -120,12 +124,13 @@ class Camera:
         end = Color(0.5,0.7,1.0)
         return lerp(start,end,a)
     
-    def write_file(self,filename, pixels):
+    def write_file(self, pixels):
         with open(self.filename,"w") as f:
             f.write(f"P3\n{self.image_width} {self.image_height}\n")
             f.write("255\n")
-            for pixel in self.pixels:
-                self.write_color(f,pixel)
+            for i in range(self.n_threads):
+                for pixel in pixels[i]:
+                    self.write_color(f,pixel)
         
 
     def write_color(self, out, pixel_color):
