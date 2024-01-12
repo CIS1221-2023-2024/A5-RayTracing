@@ -13,24 +13,19 @@ def benchmark_decorator(func):
     def wrapper(*args, **kwargs):
         time_start = time()
         tracemalloc.start()
-        result = func(*args, **kwargs)
+        func(*args, **kwargs)
         time_end = time()
         time_duration = time_end - time_start
-
-
-        print(f'Took {time_duration:.3f} seconds')
         current,peak = tracemalloc.get_traced_memory()
-        print(f'Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB')
-
         tracemalloc.stop()
-        return result
+        return [time_duration, current, peak]
     return wrapper
 
 @benchmark_decorator
 def benchmark(function, **kargs):
-    function(**kargs)
+    return function(**kargs)
 
-def generate_setting(samples = 10, width = 400, depth=5, number=4, output="output.png", numpy=False, ratio = 16/9):
+def generate_setting(samples = 10, width = 400, depth=5, number=6, output="output.png", numpy=False, ratio = 16/9):
     return {
         "samples": samples,
         "width": width,
@@ -44,7 +39,7 @@ def generate_setting(samples = 10, width = 400, depth=5, number=4, output="outpu
 def main():
     samples =  [5,50,100]
     depths = [5,10,20]
-    widths = [480,1360,1920]
+    widths = [100,1360]
 
     # Generate all possible combinations
     combinations = list(product(samples, depths, widths))
@@ -55,7 +50,16 @@ def main():
     for idx,setting in enumerate(settings):
         setting['output'] = f"./benchmarks/{setting['samples']}_{setting['depth']}_{setting['width']}_{setting['number']}_{'np' if setting['numpy'] else 'python'}_{idx}.ppm"
         renderer = PythonRenderer()
-        benchmark(renderer.render, **setting)
+        time_delta, current, peak = benchmark(renderer.render, **setting)
+        pixel_per_minute = setting['width'] * setting['width'] / time_delta * 60
+        print(f"Total pixels: {setting['width'] * setting['width']}")
+        print(f"Total time: {time_delta}")
+        print(f"Pixels per minute: {pixel_per_minute}")
+        print(f"Memory usage: {current / 10**6}MB")
+        print(f"Peak memory usage: {peak / 10**6}MB")
+        print(f"Samples: {setting['samples']}")
+        print(f"Depth: {setting['depth']}")
+        print(f"Width: {setting['width']}")
 
 if __name__ == "__main__":
     main()
