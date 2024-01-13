@@ -21,6 +21,7 @@ class Camera:
     vup = Vec3(0,1,0);   
     u, v, w = Vec3(0,0,0), Vec3(0,0,0), Vec3(0,0,0)
 
+    folder = "results/"
     filename="output.ppm"
     pixels = []
     n_process = 6
@@ -66,7 +67,7 @@ class Camera:
                 results.append(pixel_color)
 
         pixels[idx] = results
-        print("\rDone.")
+        print(f"Process {idx} done.")
 
     def initialize(self):
 
@@ -131,7 +132,7 @@ class Camera:
         return lerp(start,end,a)
     
     def write_file(self, pixels):
-        with open(self.filename,"w") as f:
+        with open(self.folder + self.filename,"w") as f:
             f.write(f"P3\n{self.image_width} {self.image_height}\n")
             f.write("255\n")
             for i in range(self.n_process):
