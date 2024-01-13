@@ -23,7 +23,7 @@ class Camera:
 
     filename="output.ppm"
     pixels = []
-    n_threads = 6
+    n_process = 6
 
     image_height = 100
     camera_center = Point3(0,0,0)
@@ -33,12 +33,12 @@ class Camera:
 
     def render(self, world):
         self.initialize()
-        threads = []
+        processes = []
         manager = multiprocessing.Manager()
         pixels = manager.dict()
         idx = 0
-        step = self.image_height // self.n_threads 
-        remainder = self.image_height % self.n_threads
+        step = self.image_height // self.n_process 
+        remainder = self.image_height % self.n_process
         for i in range(0, self.image_height, step):
             world_new = copy.deepcopy(world)
 
@@ -48,10 +48,10 @@ class Camera:
             t = multiprocessing.Process(target=self.render_width, args=(idx,pixels,i,i + step,world_new))
             idx += 1
             t.start()
-            threads.append(t)
+            processes.append(t)
 
-        for thread in threads:
-            thread.join()
+        for process in processes:
+            process.join()
 
         self.write_file(pixels)
 
@@ -134,7 +134,7 @@ class Camera:
         with open(self.filename,"w") as f:
             f.write(f"P3\n{self.image_width} {self.image_height}\n")
             f.write("255\n")
-            for i in range(self.n_threads):
+            for i in range(self.n_process):
                 for pixel in pixels[i]:
                     self.write_color(f,pixel)
         

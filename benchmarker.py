@@ -25,7 +25,7 @@ def benchmark_decorator(func):
 def benchmark(function, **kargs):
     return function(**kargs)
 
-def generate_setting(samples = 10, width = 400, depth=5, number=6, output="output.png", numpy=False, ratio = 16/9):
+def generate_setting(samples = 10, width = 400, depth=5, number=6, output="output.png", numpy=False, ratio = 16/9, n_process = 4):
     return {
         "samples": samples,
         "width": width,
@@ -33,37 +33,31 @@ def generate_setting(samples = 10, width = 400, depth=5, number=6, output="outpu
         "number": number,
         "output": output,
         "numpy": numpy,
-        "ratio": ratio
-    }
-
-def generate_setting(samples = 10, width = 400, depth=5, number=4, output="output.png", numpy=False, ratio = 16/9):
-    return {
-        "samples": samples,
-        "width": width,
-        "depth": depth,
-        "number": number,
-        "output": output,
-        "numpy": numpy,
-        "ratio": ratio
+        "ratio": ratio,
+        "n_process" : n_process
     }
 
 def main():
-    samples =  [5,50,100]
+    samples =  [1,50,100]
     depths = [5,10,20]
     widths = [100,1360]
 
     # Generate all possible combinations
     combinations = list(product(samples, depths, widths))
 
-    # Display the result
     totals = [list(combination) for combination in combinations]
     settings = [generate_setting(samples=total[0],depth=total[1],width=total[2]) for total in totals]
+
     for idx,setting in enumerate(settings):
         setting['output'] = f"./benchmarks/{setting['samples']}_{setting['depth']}_{setting['width']}_{setting['number']}_{'np' if setting['numpy'] else 'python'}_{idx}.ppm"
         renderer = PythonRenderer()
+
+        heigth = int(setting['width'] / setting['ratio'])
+
         time_delta, current, peak = benchmark(renderer.render, **setting)
-        pixel_per_minute = setting['width'] * setting['width'] / time_delta * 60
-        print(f"Total pixels: {setting['width'] * setting['width']}")
+        pixel_per_minute = setting['width'] * heigth / time_delta * 60
+
+        print(f"Total pixels: {setting['width'] * heigth}")
         print(f"Total time: {time_delta}")
         print(f"Pixels per minute: {pixel_per_minute}")
         print(f"Memory usage: {current / 10**6}MB")
