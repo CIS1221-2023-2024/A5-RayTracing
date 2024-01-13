@@ -10,7 +10,7 @@ import random
 
 
 class Renderer:
-    def render(self,samples, width, depth, number, output, numpy, ratio, n_process):
+    def render(self,samples, width, depth, number, output, numpy, ratio, workers):
         random.seed(100)
         world = HittableList()
         world.clear()
@@ -54,6 +54,6 @@ class Renderer:
         cam.lookfrom = Point3(13,2,3)
         cam.lookat   = Point3(0,0,0)
         cam.vup      = Vec3(0,1,0)
-        cam.n_process = n_process
+        cam.n_process = workers
 
         cam.render(world)
