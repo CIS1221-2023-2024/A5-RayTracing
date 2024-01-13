@@ -162,6 +162,9 @@ The rendering process is initiated with the `cam.render(world)` method, where ra
 <div style="margin-left: 20px">
     <h4 style="margin-left: -10px">Benchmarker</h4>
 
-benchmarker... 
+The benchmarker.py script file is where all the benchmarks happens.
+It is using a decorator to measure times (using time module) and memory (using tracemalloc module).
+It basically takes three array and generate all the possible combinations of parameters to pass to the renderer and then it runs the renderer with those parameters and prints the results.
+To have a deeper inside of the benchmarking process, please refer to the [Comparisons](../docs/comparisons.md) file.
 
 </div>
