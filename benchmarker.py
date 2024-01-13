@@ -36,6 +36,17 @@ def generate_setting(samples = 10, width = 400, depth=5, number=6, output="outpu
         "ratio": ratio
     }
 
+def generate_setting(samples = 10, width = 400, depth=5, number=4, output="output.png", numpy=False, ratio = 16/9):
+    return {
+        "samples": samples,
+        "width": width,
+        "depth": depth,
+        "number": number,
+        "output": output,
+        "numpy": numpy,
+        "ratio": ratio
+    }
+
 def main():
     samples =  [5,50,100]
     depths = [5,10,20]

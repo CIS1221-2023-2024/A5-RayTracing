@@ -1,9 +1,9 @@
-from python_rayt.Renderer import Renderer
+from python_numpy_rayt.Renderer import Renderer
 
 def main():
-    samples = 100
+    samples = 3
     width = 200
-    depth = 50
+    depth = 3
     number = 11
     output = "output.ppm"
     numpy = False
