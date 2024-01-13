@@ -25,13 +25,14 @@ These rays solve the visibility problem and are called primary rays (or camera r
 
 ### Testing For Intersections
 
-To actually display something, we need to check if our ray intersects any of the objects that are in our scene. 
+To actually display something, we need to check if our ray intersects any of the objects that are in our scene.
 For mathematically described shapes (AKA spheres, triangles, etc), we can do this using a geometrical approach to solve an equation.
+
 - **SPHERE EQUATION**
   The equation for a sphere of radius *r* centered at the origin is: $x^2 + y^2 + z^2 = r^2$
   So if any given point $(x,y,z)$ is on the sphere, then $x^2 + y^2 + z^2 = r^2$, if the point is inside the sphere, then $x^2 + y^2 + z^2 < r^2$ and if it is outside the sphere, then $x^2 + y^2 + z^2 > r^2$
   Suppose we want to allow the sphere center to be at an arbitrary point with coordinates $(C_x, C_y, C_z)$, then the equation becomes: $(x-C_x)^2 + (y-C_y)^2 + (z-C_z)^2 = r^2$.
-  Generally speaking, we would like the formulas to be in terms of vectors so that all the coordinates can be expressed using a Vector class. 
+  Generally speaking, we would like the formulas to be in terms of vectors so that all the coordinates can be expressed using a Vector class.
   This implies that the vector that goes from the center $C = (C_x, C_y, C_z)$ to a point $P = (x,y,z)$ is $(P - C)$
   Utilizing the definition of dot product between two vectors we get that the distance between center and point is equals to the definition of the sphere given a center of coordinates  $(C_x, C_y, C_z)$. Therefore, we can rewrite the equation as follows: $(P - C) \cdot (P - C) = r^2$
   We want to know wether our ray $P(t)$ ever hits the sphere anywhere.
@@ -56,6 +57,7 @@ In ray tracing, whenever an intersection is found, the distance *t* from the cam
 ### Shading
 
 Once the object intersected with the ray is found, then we need to find out what the color of the object is at the intersection point. This requires the knowledge of:
+
 - How much light is the point assorbing
 - Which direction has the light 
 - The property of the surface (its color, its refraction, its reflection, ecc)
@@ -63,9 +65,6 @@ Once the object intersected with the ray is found, then we need to find out what
 
 Some of the rays might also hit multiple surfaces and be reflected again.
 While in the real world is the light that travels from the light source to the eye, in ray tracing this process is usually done differently, taking into consideration which rays is the viewpoint seeing first. This gets called *backward* tracing
-
-
-
 
 ## Bibliography
 
