@@ -19,6 +19,7 @@
 - 3.4 Lambertian
 
 ### [4. Utilities & more](#utilities-&-more)
+- 4.1 Utilities
 - 4.2 Renderer
 - 4.3 Benchmarker
 
