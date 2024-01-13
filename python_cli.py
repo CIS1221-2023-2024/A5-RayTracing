@@ -16,6 +16,7 @@ parser.add_argument("-n", "--number", type=int, default=4, help="Number of spher
 parser.add_argument("-o", "--output", type=str, default="output.ppm", help="Output file name")
 parser.add_argument("-np", "--numpy", type=bool, default=False, help="Use numpy for calculations")
 parser.add_argument("-r", '--ratio', type=float, default=16.0 / 9.0, help="Aspect ratio of the image")
+parser.add_argument("-w","--workers", type=int, default=4, help="Number of workers")
  
 args = parser.parse_args().__dict__
 renderer = PythonRenderer()
