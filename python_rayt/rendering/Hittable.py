@@ -39,7 +39,7 @@ class HittableList():
         self.objects.clear()
 
     def hit(self, ray, ray_t, rec):
-        temp_rec = HitRecord()
+        temp_rec = rec
         self.hit_anything = False
         self.closest_so_far = ray_t.t_max
 

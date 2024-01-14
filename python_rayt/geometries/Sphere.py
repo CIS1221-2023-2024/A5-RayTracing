@@ -6,12 +6,13 @@ class Sphere(IHittable):
         self.center = center
         self.radius = radius
         self.mat = mat
+        self.radius_squared = radius**2
     
     def hit(self, r, ray_t, rec):
         oc = r.origin - self.center
         a = r.direction.length_squared()
         half_b = r.direction.dot(oc)
-        c = oc.length_squared() - self.radius**2
+        c = oc.length_squared() - self.radius_squared
 
         discriminant = half_b*half_b - a*c
         if (discriminant < 0):

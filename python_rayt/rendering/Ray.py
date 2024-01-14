@@ -1,3 +1,5 @@
+import copy
+
 class Ray:
 
     def __init__(self, origin, direction):
@@ -8,5 +10,5 @@ class Ray:
         return self.origin + t * self.direction
 
     def copy(self, ray2):
-        self.origin = ray2.origin
-        self.direction = ray2.direction
+        self.origin = copy.copy(ray2.origin)
+        self.direction = copy.copy(ray2.direction)
