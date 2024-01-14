@@ -36,7 +36,7 @@ Be patient!
 
 ## C#'s instruction
 
-1. Clone the repository on your machine
-2. Execute the file in the `binaries` folder
-    1. If you are on Windows, execute the `rayTracing_win64` file
+1. Download at the [latest release](https://github.com/CIS1221-2023-2024/A5-RayTracing/releases/tag/v1) the zip for you operating system
+2. Unzip the folder and click on the executable file
+    1. If you are on Windows, execute the `TestRayt` file
     2. If you are on Linux, execute the `rayTracing_linux` file
