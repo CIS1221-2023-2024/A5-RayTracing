@@ -30,11 +30,13 @@ This project will approach ray-tracing using different programming languages, yo
 
 ## Recommendations
 
-The image will have the `.pmm` extension, you can either install the "PBM/PPM/PGM Viewer for Visual Studio Code" from the extensions marketplace of Visual Studio, or use this online tool: "https://www.cs.rhodes.edu/welshc/COMP141_F16/ppmReader.html"
+The image will have the `.ppm` extension, you can either install the "PBM/PPM/PGM Viewer for Visual Studio Code" from the extensions marketplace of Visual Studio, or use this online tool: "https://www.cs.rhodes.edu/welshc/COMP141_F16/ppmReader.html"
 
 Be patient!
 
 ## C#'s instruction
 
 1. Clone the repository on your machine
-2. Execute the executable file inside the `binaries` folder
+2. Execute the file in the `binaries` folder
+    1. If you are on Windows, execute the `rayTracing_win64` file
+    2. If you are on Linux, execute the `rayTracing_linux` file
