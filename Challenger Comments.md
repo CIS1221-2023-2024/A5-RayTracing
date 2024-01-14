@@ -1,5 +1,3 @@
-Ray Tracing without NumPy
-
 Utilities.py
 
 I do not see any improvements which can be done to this class.
