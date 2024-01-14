@@ -40,14 +40,12 @@ For mathematically described shapes (AKA spheres, triangles, etc), we can do thi
   $P(t) = O + t b$, where O is the origin of the ray, b is the direction of the ray and t is the distance from the origin to the sphere. This means that if the equation solved for t does not give any value, the ray is not intersecting the sphere at any point, it follows that if the equation has one solution the ray is tangent to the sphere, if it has two the ray is hitting the sphere twice, hence it's secant.
   We can rewrite the equation as follows: $(P(t) - C) \cdot (P(t) - C) = r^2$, or rather
   $((O + tb) - C) \cdot ((O + tb) - C) = r^2$
-  Solving for t, and using the quadratic formula we get that 
+  Solving for t, and using the quadratic formula we get that
   $ a = b \cdot b, \newline
   b = 2b \cdot (O -C) \newline
   c = (A - C) \cdot (A - C) - r^2
   $
   Note that all the steps are not worked out in this paper since they are quite long
-- **TRIANGLE EQUATION**
-  - /equation/
 
 For shapes of more complex objects like polygon meshes, subdivision surfaces or NURBS (Non-Uniform-Rational-B-Splines) the approach used for the geometrically described shapes becomes a bit more difficult, therefore, the easiest solution programmers have come up with is to abstract the object, converting each geometry type using the same, identical form of representation: a triangle. So even the most complex geometries can be fragmented (the exact term is "tessellated") into multiple more simple shapes.
 Triangles, rather than other polygons, have been chosen to be the most atomic way of representing a complex object because of their mathamtical properties: they have a simple geometry with only 3 vertexes, many algorithms such as intersection tests, barycentric coordinates calculator and interpolation are simpler and more efficient computationally speaking. <br>
@@ -59,7 +57,7 @@ In ray tracing, whenever an intersection is found, the distance *t* from the cam
 Once the object intersected with the ray is found, then we need to find out what the color of the object is at the intersection point. This requires the knowledge of:
 
 - How much light is the point assorbing
-- Which direction has the light 
+- Which direction has the light
 - The property of the surface (its color, its refraction, its reflection, ecc)
 - The observer position, since most surfaces do not reflect light equally in all directions, hence the amount of reflected light is likely to change depending on the camera and the observer position.
 
