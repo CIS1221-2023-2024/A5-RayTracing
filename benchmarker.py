@@ -25,7 +25,7 @@ def benchmark_decorator(func):
 def benchmark(function, **kargs):
     return function(**kargs)
 
-def generate_setting(samples = 10, width = 400, depth=5, number=6, output="output.png", numpy=False, ratio = 16/9, n_process = 4):
+def generate_setting(samples = 10, width = 400, depth=5, number=6, output="output.png", numpy=False, ratio = 16/9, workers = 4, seed=100):
     return {
         "samples": samples,
         "width": width,
@@ -34,16 +34,19 @@ def generate_setting(samples = 10, width = 400, depth=5, number=6, output="outpu
         "output": output,
         "numpy": numpy,
         "ratio": ratio,
-        "n_process" : n_process
+        "workers" : workers,
+        "seed" : seed
     }
 
 def main():
-    samples =  [1,50,100]
-    depths = [5,10,20]
-    widths = [100,1360]
+    samples =  [50]
+    depths = [10,20]
+    widths = [480]
 
     # Generate all possible combinations
     combinations = list(product(samples, depths, widths))
+    combinations.append((50,10,1280))
+    print(f"Total combinations: {combinations}")
 
     totals = [list(combination) for combination in combinations]
     settings = [generate_setting(samples=total[0],depth=total[1],width=total[2]) for total in totals]

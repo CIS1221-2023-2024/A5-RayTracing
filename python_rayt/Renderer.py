@@ -10,8 +10,8 @@ import random
 
 
 class Renderer:
-    def render(self,samples, width, depth, number, output, numpy, ratio, workers):
-        random.seed(100)
+    def render(self,samples, width, depth, number, output, numpy, ratio, workers, seed):
+        random.seed(seed)
         world = HittableList()
         world.clear()
 
