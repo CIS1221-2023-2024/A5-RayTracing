@@ -49,6 +49,18 @@ Finally, we can also increase the resolution of the image, which will result in 
 |:--:|
 | 1280x720 |
 
+However, this comes at a cost. Let's see how much higher is the rendering time for 1280x720 resolution:
+
+| ![samples_time_bar_graph_1280](../docs/images/png_images/samples_time_bar_graph_1280.png)|
+|:--:|
+| 1280x720 rendering time |
+
+This is the highest resolution we were able to render with our PC, and this is the result:
+
+| ![50_20_1280](../docs/images/png_images/50_20_1280_6_python_3.png)|
+|:--:|
+| 1280x720 resolution |
+
 Increasing the quality also increases the rendering time. Let's see how the rendering time varies as we increase the number of samples per pixel:
 
 | ![samples_time_bar_graph](../docs/images/png_images/samples_time_bar_graph.png)|
@@ -57,8 +69,14 @@ Increasing the quality also increases the rendering time. Let's see how the rend
 
 It is important to note that the images above were generated using the multiprocessing module of Python, which allowed us to parallelize the rendering process. This resulted in a big performance boost, as we can see in the following table:
 
-IMAGESS
+| ![workers_bar_graph](../docs/images/png_images/workers_bar_graph.png)|
+|:--:|
+| Rendering time for Number of Workers |
 
 ### Numpy Drama
 
-We decided to use the numpy module to speed up the computation of the raytracer. However, we found out that the overhead of using numpy to create arrays was too big and it acctually slowed down the computation. We decided to use lists instead, which resulted in a big performance boost. Let's see how the rendering time varies as we increase the number of samples per pixel with numpy and without numpy:
+We decided to use the numpy module to speed up the computation of the raytracer. However, we found out that the overhead of using numpy to create arrays was too big and it acctually slowed down the computation. Let's see how the rendering time varies as we enable the numpy module:
+
+| ![numpy_bar_graph](../docs/images/png_images/numpy_bar_graph.png)|
+|:--:|
+| Numpy Off Vs Numpy On |
