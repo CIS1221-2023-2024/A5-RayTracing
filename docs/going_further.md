@@ -2,22 +2,6 @@
 
 Our exploration has just scratched the surface of what a raytracer can achieve. For those looking to dive deeper, consider the following optimizations and feature additions:
 
-- Other Shapes: Implementing shapes beyond spheres, (everything can be expressed as a sum of triangles).
-- Lights
-- Volumes: Exploring volumetric path tracing for added realism.
-- Depth Of Field
-- Monte Carlo Integration
-
-These are all extremely computer-graphics related stuff, however, there are still some things that we can do to improve the performance of our python raytracer:
-
-- Using GPU for calculation via the CUDA module
-- Refactoring our multiprocessing architecture to render chunk of images vertically and not horizontally. 
-- Refactoring our multiprocessing architecture to use a Process pool instead of assigning each process a task. This can improve the efficiency because, since image is not evenly distributed in objects to render, some process will by force finish earlier, lowering down the pixel rendered per minute. If a process can be reused after it completed the job, we could approach a solution that is, in our estimate, 10-20% faster.
-
-We had a lot of fun uncovering the world of Ray Tracing, I hope you'll have fun too!
-
-Our exploration has just scratched the surface of what a raytracer can achieve. For those looking to dive deeper, consider the following optimizations and feature additions:
-
 1. **Other Shapes:** Implementing shapes beyond spheres, as everything can be expressed as a sum of triangles.
 
 2. **Lights:** Introduce various light sources to enhance the realism and visual appeal of the scenes.
