@@ -70,4 +70,5 @@ def main():
         print(f"Width: {setting['width']}")
 
 if __name__ == "__main__":
+    exit(0) # Disable benchmarking
     main()
