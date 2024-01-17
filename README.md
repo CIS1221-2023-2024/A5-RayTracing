@@ -1,5 +1,8 @@
 # A5-RayTracing
 
+| ![500_20_1920](./docs/images/png_images/500_20_1920_6_python_0.png) |
+|:--:|
+| 1920x1080, 500 samples per pixel, 19h rendering time on Ryzen 9 5900x |
 ## The idea
 
 This project will approach ray-tracing using different programming languages, you can find details about each of them in the respective wiki page associated below
@@ -12,6 +15,7 @@ This project will approach ray-tracing using different programming languages, yo
 - [What is ray tracing?](./docs/what_is_ray_tracing.md)
 - [Comparisons](./docs/comparisons.md)
 - [Going further](./docs/going_further.md)
+- [Medium Post](https://medium.com/@giuseppe.dimarco.23/ray-tracing-from-0-to-1-out-of-100-a901b9590718)
 
 ## Team members 🇮🇹
 
